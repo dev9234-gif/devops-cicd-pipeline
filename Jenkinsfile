@@ -3,7 +3,7 @@ pipeline {
 
     environment {
         AWS_REGION = "us-east-1"
-        ECR_REPO = "your-ecr-repo-url"
+        ECR_REPO = "117911340225.dkr.ecr.us-east-1.amazonaws.com/devops/cicd"
     }
 
     stages {
