@@ -3,21 +3,25 @@ pipeline {
 
     stages {
 
-        stage('Clone') {
+        stage('Clone Code') {
             steps {
-                echo 'Cloning code...'
+                git 'https://github.com/dev9234-gif/devops-cicd-pipeline.git'
             }
         }
 
-        stage('Build') {
+        stage('Build Docker Image') {
             steps {
-                echo 'Building app...'
+                sh 'docker build -t node-app .'
             }
         }
 
-        stage('Test') {
+        stage('Run Container') {
             steps {
-                echo 'Testing app...'
+                sh '''
+                docker stop node-app || true
+                docker rm node-app || true
+                docker run -d -p 3000:3000 --name node-app node-app
+                '''
             }
         }
     }
